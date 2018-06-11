@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.dao.TemaDAO;
 import modelo.dominio.Tema;
 
-@WebServlet("/listarTemasAtivos")
-public class ServletTemaListar extends HttpServlet {
+@WebServlet("/listarTemasInativos")
+public class ServletTemaListarInativos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public ServletTemaListar() {
+    public ServletTemaListarInativos() {
         super();
     }
 
@@ -27,13 +27,13 @@ public class ServletTemaListar extends HttpServlet {
 		TemaDAO dao = new TemaDAO();
 		
 		// carregar do banco a lista de produtos...
-		List<Tema> lista = dao.listar();
+		List<Tema> lista = dao.listarInativos();
 		
 		// enviar a lista de produtos para a página...
 		request.setAttribute("lista", lista);
 		
 		// enviar o processamento para a página
-		RequestDispatcher desp = request.getRequestDispatcher("temaListar.jsp");
+		RequestDispatcher desp = request.getRequestDispatcher("temaListarInativo.jsp");
 		desp.forward(request, response);
 	}
 

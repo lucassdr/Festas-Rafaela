@@ -14,7 +14,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Festas</title>
+<title>Itens Inativos</title>
 <!-- Bootstrap core CSS-->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this template-->
@@ -25,18 +25,22 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
+<link rel="icon" type="images/png" sizes="192x192"  href="images/fav.png">
+<meta name="theme-color" content="#FFA500">
 </head>
+
 <script type="text/javascript">
-	function confirmar(id, nome) {
-		if (confirm('Deseja realmente excluir o tema [' + nome + ']?')) {
+	function confirmar(id, nome, username) {
+		if (confirm('' + username + ', deseja realmente excluir o item? Nome: [' + nome + '] - Código: [' + id + ']')) {
 			// modelo DOM
-			window.location = 'excluirItem?id=' + id;
+			window.location = 'excluir?id=' + id;
 		}
 	}
 </script>
+
 <script type="text/javascript">
-	function alterar(id, status, nome) {
-		if (confirm('Deseja realmente alterar o status do item [' + nome + ']?')) {
+	function alterar(id, status, nome, username) {
+		if (confirm('' + username + ', deseja realmente alterar o status do item [' + nome + ']?')) {
 			// modelo DOM
 			window.location = 'statusItem?id=' + id+ '&status=' + status;
 		}
@@ -76,16 +80,22 @@
 						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
 				</a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Tables"><a class="nav-link" href="listarTemas"> <i
-						class="fa fa-fw fa-table"></i> <span class="nav-link-text">Temas</span>
-				</a></li>
+					title="Components">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+						<i	class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Temas</span>
+					</a>
+					<ul class="sidenav-second-level collapse" id="collapseComponents">
+						<li><a href="listarTemasAtivos">Temas ativos</a></li>
+						<li><a href="listarTemasInativos">Temas inativos</a></li>
+					</ul>
+				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Components"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseComponents" data-parent="#exampleAccordion"> <i
+					href="#collapseComponentsItens" data-parent="#exampleAccordion"> <i
 						class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Itens</span>
 				</a>
-					<ul class="sidenav-second-level collapse" id="collapseComponents">
+					<ul class="sidenav-second-level collapse" id="collapseComponentsItens">
 						<li><a href="listarItensAtivos">Itens ativos</a></li>
 						<li><a href="listarItensInativos">Itens inativos</a></li>
 					</ul></li>
@@ -127,8 +137,8 @@
 					<tr>
 						<td style="height: 35px; width: 326px;">
 							<a class="btn btn-primary" href="editarItem?id=${it.id}">Alterar</a>
-							<a class="btn btn-warning" href="javascript:alterar('${it.id}', '${it.status}', '${it.nome}')">Alterar status</a>
-								<a class="btn btn-danger" href="javascript:confirmar('${it.id}', '${it.nome}')">Excluir</a>
+							<a class="btn btn-warning" href="javascript:alterar('${it.id}', '${it.status}', '${it.nome}', '${username}')">Alterar status</a>
+							<a class="btn btn-danger" href="javascript:confirmar('${it.id}', '${it.nome}', '${username}')">Excluir</a>
 						</td>
 						<td>${it.id}</td>
 						<td>${it.status}</td>

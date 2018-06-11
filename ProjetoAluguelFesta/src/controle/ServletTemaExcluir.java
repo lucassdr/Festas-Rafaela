@@ -22,7 +22,7 @@ public class ServletTemaExcluir extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String codigoStr = request.getParameter("codigo");
+		String codigoStr = request.getParameter("id");
 		Integer codigo = Integer.parseInt(codigoStr);
 
 		// criar instância do DAO para persistência
@@ -36,7 +36,7 @@ public class ServletTemaExcluir extends HttpServlet {
 
 		// fazer redirect para listar os temautos, a fim de evitar
 		// vários envios repetidos
-		response.sendRedirect("listarTemas");
+		response.sendRedirect("listarTemasAtivos");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

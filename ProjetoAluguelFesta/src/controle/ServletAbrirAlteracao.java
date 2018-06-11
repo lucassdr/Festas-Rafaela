@@ -26,14 +26,14 @@ public class ServletAbrirAlteracao extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String codigoStr = request.getParameter("codigo");
-		Integer codigo = Integer.parseInt(codigoStr);
+		String idStr = request.getParameter("id");
+		Integer id = Integer.parseInt(idStr);
 		
 		// criar instância do DAO para persistência
 		TemaDAO dao = new TemaDAO();
 
 		// carregar o Tema escolhido do banco
-		Tema tem = dao.obter(codigo);
+		Tema tem = dao.obter(id);
 		
 		// guardar o Tema no request para ser lido pela página
 		request.setAttribute("tem", tem);

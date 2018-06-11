@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.dao.ItemDAO;
-import modelo.dominio.Item;
+import modelo.dao.TemaDAO;
+import modelo.dominio.Tema;
 
 /**
  * Servlet implementation class ServletAbrirAlteracao
  */
-@WebServlet("/statusItem")
-public class ServletAbrirStatusItem extends HttpServlet {
+@WebServlet("/statusTema")
+public class ServletAbrirStatusTema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletAbrirStatusItem() {
+	public ServletAbrirStatusTema() {
 		super();
 	}
 
@@ -40,27 +40,27 @@ public class ServletAbrirStatusItem extends HttpServlet {
 
 	
 		// criar instância do DAO para persistência
-		ItemDAO dao = new ItemDAO();
+		TemaDAO dao = new TemaDAO();
 		// transferir os dados para o objeto do Modelo
-		Item item;
+		Tema tema;
 
 		if (id == null)
-			item = new Item();
+			tema = new Tema();
 		else
-			item = dao.obter(id);
+			tema = dao.obter(id);
 
 		// alterar os dados do objeto
-		item.setId(id);
-		item.setStatus(status);
+		tema.setId(id);
+		tema.setStatus(status);
 
-		if (item.getStatus().equals("ativo")) {
-			item.setStatus("inativo");
-			item = dao.salvar(item);
-			response.sendRedirect("listarItensAtivos");
-		} else if (item.getStatus().equals("inativo")) {
-			item.setStatus("ativo");
-			item = dao.salvar(item);
-			response.sendRedirect("listarItensInativos");
+		if (tema.getStatus().equals("ativo")) {
+			tema.setStatus("inativo");
+			tema = dao.salvar(tema);
+			response.sendRedirect("listarTemasAtivos");
+		} else if (tema.getStatus().equals("inativo")) {
+			tema.setStatus("ativo");
+			tema = dao.salvar(tema);
+			response.sendRedirect("listarTemasInativos");
 		}
 
 	}

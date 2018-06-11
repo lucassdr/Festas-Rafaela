@@ -63,8 +63,8 @@ public class ServletSalvarItem extends HttpServlet {
 		}
 		
 		
-		if (nome == null)
-			erros.add("O valor digitado no campo Nome é inválido.");
+		if (nome == null || nome.trim().length() == 0)
+			erros.add("O valor digitado no campo Nome está em branco ou é inválido.");
 		
 		/*if (tema == null)
 			erros.add("O valor digitado no campo Situação é inválido.");*/

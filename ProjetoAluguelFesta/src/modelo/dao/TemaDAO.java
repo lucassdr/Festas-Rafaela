@@ -29,13 +29,22 @@ public class TemaDAO {
 		this.manager.getTransaction().commit();
 	}
 
-	public Tema obter(Integer codigo) {
-		return this.manager.find(Tema.class, codigo);
+	public Tema obter(Integer id) {
+		return this.manager.find(Tema.class, id);
 	}
 
 	public List<Tema> listar() {
 		
-		String jpql = "from Tema t order by t.corDaToalha";
+		String jpql = "from Tema t where t.status='ativo' order by t.corDaToalha";
+
+		List<Tema> lista = this.manager.createQuery(jpql, Tema.class).getResultList();
+
+		return lista;
+	}
+	
+	public List<Tema> listarInativos() {
+		
+		String jpql = "from Tema t where t.status='inativo' order by t.corDaToalha";
 
 		List<Tema> lista = this.manager.createQuery(jpql, Tema.class).getResultList();
 

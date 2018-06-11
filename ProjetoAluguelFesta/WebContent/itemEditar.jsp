@@ -26,6 +26,8 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
+<link rel="icon" type="images/png" sizes="192x192"  href="images/fav.png">
+<meta name="theme-color" content="#FFA500">
 </head>
 
 
@@ -46,13 +48,7 @@
 		List<Tema> listaTem = (List<Tema>) request.getAttribute("listaTem");
 
 		List<String> erros = (List<String>) request.getAttribute("erros");
-		if (erros != null) {
-			out.print("<ul>");
-			for (String erro : erros)
-				out.print("<li>" + erro + "</li>");
-
-			out.print("</ul>");
-		}
+		
 	%>
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
@@ -71,16 +67,22 @@
 						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
 				</a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Tables"><a class="nav-link" href="listarTemas"> <i
-						class="fa fa-fw fa-table"></i> <span class="nav-link-text">Temas</span>
-				</a></li>
+					title="Components">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+						<i	class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Temas</span>
+					</a>
+					<ul class="sidenav-second-level collapse" id="collapseComponents">
+						<li><a href="listarTemasAtivos">Temas ativos</a></li>
+						<li><a href="listarTemasInativos">Temas inativos</a></li>
+					</ul>
+				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Components"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseComponents" data-parent="#exampleAccordion"> <i
+					href="#collapseComponentsItens" data-parent="#exampleAccordion"> <i
 						class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Itens</span>
 				</a>
-					<ul class="sidenav-second-level collapse" id="collapseComponents">
+					<ul class="sidenav-second-level collapse" id="collapseComponentsItens">
 						<li><a href="listarItensAtivos">Itens ativos</a></li>
 						<li><a href="listarItensInativos">Itens inativos</a></li>
 					</ul></li>
@@ -106,6 +108,17 @@
 				<li class="breadcrumb-item"><a href="#">Itens</a></li>
 				<li class="breadcrumb-item active">Cadastrar item</li>
 			</ol>
+			<ol>
+				<%
+					if (erros != null) {
+						out.print("<ul>");
+						for (String erro : erros)
+							out.print("<li>" + erro + "</li>");
+			
+						out.print("</ul>");
+					}
+				%>
+			</ol>
 			<!-- Area Chart Example-->
 
 
@@ -130,20 +143,19 @@
 						<td><input class="form-control" type="text" name="nome"
 							id="nome" value="${it.nome}" size="50" maxlength="100"></td>
 					</tr>
-
-
-
+					
+					<tr>
 					<td><label for="tema">Tema:</label></td>
 					<td><select class="form-control" name="tema" id="tema">
 							<option value="">Selecione...</option>
 
 							<c:forEach var="tem" items="${listaTem}">
 								<c:set var="selecao" value="" />
-								<c:if test="${tem.equals(it.tema.nome) }">
+								<c:if test="${tem == it.tema.nome}">
 									<c:set var="selecao" value="selected='selected'" />
 								</c:if>
 
-								<option ${selecao} value="${tem.codigo}">${tem.nome}</option>
+								<option ${selecao} value="${tem.id}">${tem.nome}</option>
 							</c:forEach>
 					</select></td>
 					</tr>

@@ -34,18 +34,20 @@ public class ServletSalvarTema extends HttpServlet {
 		List<String> erros = new ArrayList<String>();
 		
 		// ler os campos do formulário
-		String codigoStr = request.getParameter("codigo");
+		String idStr = request.getParameter("id");
 		String valorStr = request.getParameter("valor");
 		String corDaToalha = request.getParameter("corDaToalha");
 		String nome = request.getParameter("nome");
+		String status = request.getParameter("status");
+		System.out.println("STATUS TEMA " + request.getParameter("status"));
 		
 		// converter os tipos numéricos
 
-		Integer codigo;
+		Integer id;
 		try {
-			codigo = Integer.parseInt(codigoStr);
+			id = Integer.parseInt(idStr);
 		} catch (NumberFormatException e) {
-			codigo = null;
+			id = null;
 		}
 		
 		Float valor;
@@ -56,42 +58,41 @@ public class ServletSalvarTema extends HttpServlet {
 		}
 		
 		if(valor == null)
-			erros.add("O campo Valor é obritatório");
+			erros.add("O campo Valor é obrigatório");
 		
 		if (corDaToalha == null || corDaToalha.trim().length() == 0)
-			erros.add("O campo Descrição é obrigatório.");
+			erros.add("O campo Cor da Toalha é obrigatório.");
 		
-		if (corDaToalha == null)
-			erros.add("O valor digitado no campo Cor da tolha é inválido.");
-		
-		if (nome == null)
-			erros.add("O valor digitado no campo Nome é inválido.");
+		if (nome == null || nome.trim().length() == 0)
+			erros.add("O valor digitado no campo Nome está em branco ou é inválido.");
 		
 		// criar instância do DAO para persistência
 		TemaDAO dao = new TemaDAO();
 		// transferir os dados para o objeto do Modelo
 		Tema tema;
 		
-		if (codigo == null)
+		if (id == null)
 			tema = new Tema();
 		else
-			tema = dao.obter(codigo);
+			tema = dao.obter(id);
 		
 		// alterar os dados do objeto
-		tema.setCodigo(codigo);
+		tema.setId(id);
 		tema.setValor(valor);
 		tema.setCorDaToalha(corDaToalha);
 		tema.setNome(nome);
+		tema.setStatus(status);
 		
 		// testar se os dados enviados estão corretos
 		if (erros.size() == 0)
 		{
 			// salvar o objeto no banco de dados
+			tema.setStatus("ativo");
 			tema = dao.salvar(tema);
 
 			// fazer redirect para listar os temautos, a fim de evitar
 			// vários envios repetidos
-			response.sendRedirect("listarTemas");
+			response.sendRedirect("listarTemasAtivos");
 		}
 		else
 		{

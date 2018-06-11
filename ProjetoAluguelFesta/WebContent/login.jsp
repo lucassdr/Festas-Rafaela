@@ -19,6 +19,8 @@
 	rel="stylesheet" type="text/css">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
+<link rel="icon" type="images/png" sizes="192x192"  href="images/fav.png">
+<meta name="theme-color" content="#FFA500">
 </head>
 
 <body class="bg-dark">
@@ -31,7 +33,7 @@
 						<label for="exampleInputEmail1">Nome de usuário</label> <input
 							class="form-control" name="username" id="exampleInputEmail1"
 							type="text" aria-describedby="emailHelp"
-							placeholder="joaozinho@email.com">
+							placeholder="doloresfuertes">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Senha</label> <input

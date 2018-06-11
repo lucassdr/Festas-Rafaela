@@ -19,7 +19,7 @@ public class Tema {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEMAS_PK")
-	private Integer codigo;
+	private Integer id;
 
 	@Column(name = "cor_toalha")
 	private String corDaToalha;
@@ -30,6 +30,9 @@ public class Tema {
 	@Column(name = "nome", length = 120)
 	private String nome;
 
+	@Column(length = 10)
+	private String status;
+
 	@OneToMany(mappedBy = "tema", fetch = FetchType.LAZY)
 	private List<Item> item;
 
@@ -37,21 +40,22 @@ public class Tema {
 		super();
 	}
 
-	public Tema(Integer codigo, String corDaToalha, Float valor, String nome, List<Item> item) {
+	public Tema(Integer id, String corDaToalha, Float valor, String nome, String status, List<Item> item) {
 		super();
-		this.codigo = codigo;
+		this.id = id;
 		this.corDaToalha = corDaToalha;
 		this.valor = valor;
 		this.nome = nome;
+		this.status = status;
 		this.item = item;
 	}
 
-	public Integer getCodigo() {
-		return codigo;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCorDaToalha() {
@@ -78,6 +82,14 @@ public class Tema {
 		this.nome = nome;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public List<Item> getItem() {
 		return item;
 	}
@@ -90,10 +102,11 @@ public class Tema {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((corDaToalha == null) ? 0 : corDaToalha.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
@@ -107,15 +120,15 @@ public class Tema {
 		if (getClass() != obj.getClass())
 			return false;
 		Tema other = (Tema) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
 		if (corDaToalha == null) {
 			if (other.corDaToalha != null)
 				return false;
 		} else if (!corDaToalha.equals(other.corDaToalha))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (item == null) {
 			if (other.item != null)
@@ -126,7 +139,12 @@ public class Tema {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;		
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		if (valor == null) {
 			if (other.valor != null)
 				return false;

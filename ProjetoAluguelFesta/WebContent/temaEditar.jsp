@@ -26,6 +26,8 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
+<link rel="icon" type="images/png" sizes="192x192"  href="images/fav.png">
+<meta name="theme-color" content="#FFA500">
 </head>
 
 
@@ -46,14 +48,9 @@
     List<Item> listaIt = (List<Item>) request.getAttribute("listaIt");
 
     List<String> erros = (List<String>) request.getAttribute("erros");
-    if (erros != null) {
-      out.print("<ul>");
-      for (String erro : erros)
-        out.print("<li>" + erro + "</li>");
-
-      out.print("</ul>");
-    }
-  %>
+    
+    %>
+   
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="mainNav">
@@ -71,16 +68,22 @@
 						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
 				</a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Tables"><a class="nav-link" href="listarTemas"> <i
-						class="fa fa-fw fa-table"></i> <span class="nav-link-text">Temas</span>
-				</a></li>
+					title="Components">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+						<i	class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Temas</span>
+					</a>
+					<ul class="sidenav-second-level collapse" id="collapseComponents">
+						<li><a href="listarTemasAtivos">Temas ativos</a></li>
+						<li><a href="listarTemasInativos">Temas inativos</a></li>
+					</ul>
+				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Components"><a
 					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseComponents" data-parent="#exampleAccordion"> <i
+					href="#collapseComponentsItens" data-parent="#exampleAccordion"> <i
 						class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Itens</span>
 				</a>
-					<ul class="sidenav-second-level collapse" id="collapseComponents">
+					<ul class="sidenav-second-level collapse" id="collapseComponentsItens">
 						<li><a href="listarItensAtivos">Itens ativos</a></li>
 						<li><a href="listarItensInativos">Itens inativos</a></li>
 					</ul></li>
@@ -103,22 +106,37 @@
 		<div class="container-fluid">
 			<!-- Breadcrumbs-->
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Festas</a></li>
-				<li class="breadcrumb-item active">Cadastrar festas</li>
+				<li class="breadcrumb-item"><a href="#">Temas</a></li>
+				<li class="breadcrumb-item active">Cadastrar temas</li>
+			</ol>
+			<ol>
+				<%
+				    if (erros != null) {
+				      out.print("<ul>");
+				      for (String erro : erros)
+				        out.print("<li>" + erro + "</li>");
+				
+				      out.print("</ul>");
+				    }
+				  %>
 			</ol>
 			<!-- Area Chart Example-->
-
+			
 
 			<!-- AREA EDITAVEL -->
 			<form class="form-inline my-2 my-lg-0 mr-lg-2" action="salvarTema"
 				method="post">
+				
 
-
-				<input class="form-control" type="hidden" name="codigo"
-					value="${tem.codigo}">
+				<input class="form-control" type="hidden" name="id"	value="${tem.id}">
 				<table>
 					<tr>
-						<td><label for="codigo" hidden="hidden">Codigo:</label></td>
+						<td><label for="id" hidden="hidden">Id:</label></td>
+					</tr>
+					<tr>
+						<td><label for="status">Status:</label></td>
+						<td><input class="form-control" type="text" name="status"
+							id="status" value="${tem.status}" size="50" maxlength="100" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td><label for="valor">Valor:</label></td>
@@ -138,10 +156,10 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td><input class="btn btn-success" type="submit"
-							name="btnSalvar" value="Salvar"> <input
-							class="form-control" type="button" value="Cancelar"
-							onclick="window.location = 'listarTemas'"></td>
+						<td>
+							<input class="btn btn-success" type="submit" name="btnSalvar" value="Salvar">
+							<input class="form-control" type="button" value="Cancelar" onclick="window.location = 'listarTemasAtivos'">
+						</td>
 					</tr>
 				</table>
 

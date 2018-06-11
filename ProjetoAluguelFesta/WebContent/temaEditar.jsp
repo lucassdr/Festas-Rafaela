@@ -45,7 +45,7 @@
 	<jsp:useBean id="tem" scope="request" class="modelo.dominio.Tema"></jsp:useBean>
 
 	<%
-    List<Item> listaIt = (List<Item>) request.getAttribute("listaIt");
+
 
     List<String> erros = (List<String>) request.getAttribute("erros");
     

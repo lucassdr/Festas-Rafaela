@@ -36,7 +36,7 @@ public class ServletItemExcluir extends HttpServlet {
 
 		// fazer redirect para listar os temautos, a fim de evitar
 		// vários envios repetidos
-		response.sendRedirect("listarItens");
+		response.sendRedirect("listarItensAtivos");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

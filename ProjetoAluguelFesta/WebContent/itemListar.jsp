@@ -32,7 +32,7 @@
 	function confirmar(id, nome, username) {
 		if (confirm('' + username + ', deseja realmente excluir o item? Nome: [' + nome + '] - Código: [' + id + ']')) {
 			// modelo DOM
-			window.location = 'excluir?id=' + id;
+			window.location = 'excluirItem?id=' + id;
 		}
 	}
 </script>

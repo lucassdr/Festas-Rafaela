@@ -1,3 +1,4 @@
+<%@page import="modelo.dominio.Item"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@page import="modelo.dominio.Tema"%>
@@ -50,6 +51,9 @@
 	//    TYPE CAST  /  CASTING
 	List<Tema> lista = (List<Tema>) request.getAttribute("lista");
 	Tema tem = null;
+	
+	List<Item> listaItem = (List<Item>) request.getAttribute("listaItem");
+	Item it = null;
 %>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -130,10 +134,9 @@
 				</div>
 			</div>
 			<!-- AREA EDITAVEL -->
-			<table class="table table-bordered" id="dataTable" width="100%"
-				cellspacing="0">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<tr>
-					<th style="height: 35px; width: 200px;">Opções</th>
+					<th>Opções</th>
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Valor</th>
@@ -142,7 +145,8 @@
 				</tr>
 				<c:forEach var="tem" items="${lista}">
 					<tr>
-						<td><a class="btn btn-primary" href="editar?id=${tem.id}">Alterar</a>
+						<td style="height: 35px; width: 300px;">
+							<a class="btn btn-primary" href="editar?id=${tem.id}">Alterar</a>
 							<a class="btn btn-warning" href="javascript:alterar('${tem.id}', '${tem.status}', '${tem.nome}', '${username}')">Alterar status</a>
 							<a class="btn btn-danger" href="javascript:confirmar('${tem.id}', '${tem.nome}', '${username}')">Excluir</a>
 						</td>

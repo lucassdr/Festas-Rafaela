@@ -132,7 +132,7 @@
 			<table class="table table-bordered" id="dataTable" width="100%"
 				cellspacing="0">
 				<tr>
-					<th style="height: 35px; width: 200px;">Opções</th>
+					<th>Opções</th>
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Valor</th>
@@ -141,9 +141,9 @@
 				</tr>
 				<c:forEach var="tem" items="${lista}">
 					<tr>
-						<td><a class="btn btn-primary" href="editar?id=${tem.id}">Alterar</a>
+						<td  style="height: 35px; width: 250px;">
+							<a class="btn btn-primary" href="editar?id=${tem.id}">Alterar</a>
 							<a class="btn btn-warning" href="javascript:alterar('${tem.id}', '${tem.status}', '${tem.nome}', '${username}')">Alterar status</a>
-							<a class="btn btn-danger" href="javascript:confirmar('${tem.id}', '${tem.nome}', '${username}')">Excluir</a>
 						</td>
 						<td>${tem.id}</td>
 						<td>${tem.nome}</td>

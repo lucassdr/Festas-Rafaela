@@ -140,10 +140,9 @@
 				</tr>
 				<c:forEach var="it" items="${lista}">
 					<tr>
-						<td style="height: 35px; width: 326px;">
+						<td style="height: 35px; width: 250px;">
 							<a class="btn btn-primary" href="editarItem?id=${it.id}">Alterar</a>
 							<a class="btn btn-warning" href="javascript:alterar('${it.id}', '${it.status}', '${it.nome}', '${username}')">Alterar status</a>
-							<a class="btn btn-danger" href="javascript:confirmar('${it.id}', '${it.nome}', '${username}')">Excluir</a>
 						</td>
 						<td>${it.id}</td>
 						<td>${it.status}</td>

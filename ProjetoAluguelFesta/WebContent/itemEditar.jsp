@@ -151,7 +151,7 @@
 
 							<c:forEach var="tem" items="${listaTem}">
 								<c:set var="selecao" value="" />
-								<c:if test="${tem.equals(it.tema.nome)}">
+								<c:if test="${tem.nome.equals(it.tema.nome)}">
 									<c:set var="selecao" value="selected='selected'" />
 								</c:if>
 

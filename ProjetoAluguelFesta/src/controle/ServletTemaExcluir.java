@@ -27,10 +27,12 @@ public class ServletTemaExcluir extends HttpServlet {
 
 		// criar instância do DAO para persistência
 		TemaDAO dao = new TemaDAO();
-
+		
+		
 		// carregar o temauto escolhido do banco
 		Tema tema = dao.obter(codigo);
-
+		
+		
 		// excluir o temauto do banco de dados
 		dao.excluir(tema);
 

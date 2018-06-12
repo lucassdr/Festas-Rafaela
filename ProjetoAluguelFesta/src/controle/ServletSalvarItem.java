@@ -100,7 +100,7 @@ public class ServletSalvarItem extends HttpServlet {
 			// guardar o temauto no request para ser lido pela página
 			request.setAttribute("tema", tema);
 			request.setAttribute("erros", erros);
-			
+						
 			// ler a lista de categorias
 			ItemDAO daoIt = new ItemDAO();
 			List<Item> listaTem = daoIt.listar();

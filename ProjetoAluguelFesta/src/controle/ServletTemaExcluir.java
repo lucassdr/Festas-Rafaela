@@ -32,13 +32,13 @@ public class ServletTemaExcluir extends HttpServlet {
 		// carregar o temauto escolhido do banco
 		Tema tema = dao.obter(codigo);
 		
-		
 		// excluir o temauto do banco de dados
-		dao.excluir(tema);
-
-		// fazer redirect para listar os temautos, a fim de evitar
-		// vários envios repetidos
-		response.sendRedirect("listarTemasAtivos");
+		if (tema.getItem() == null) {
+			dao.excluir(tema);
+			response.sendRedirect("listarTemasAtivos");
+		} else {
+			response.sendRedirect("listarTemasInativos");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
